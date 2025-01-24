@@ -2,6 +2,18 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Aliases
+alias what="pwd && ls"
+alias configbash="vim ~/.bashrc"
+alias sourcebash="source ~/bashrc"
+
+# Navigation Aliases
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -128,3 +140,16 @@ if [[ "$-" =~ i && -x "${WHICH_FISH}" && ! "${SHELL}" -ef "${WHICH_FISH}" ]]; th
   # console and wants bash, so we skip this.
   exec env SHELL="${WHICH_FISH}" "${WHICH_FISH}" -i
 fi
+
+
+# May be useful in the future
+# Set complete options for YCM
+# set completeopt=menuone,noinsert,noselect
+
+# Enable YCM to use the popup menu instead of opening a new window
+# let g:ycm_auto_trigger = 1
+# let g:ycm_confirm_extra_conf = 0
+
+# Optional: Remap Tab for YCM completion - TODO this doesn't work :(
+# inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+

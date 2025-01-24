@@ -26,20 +26,3 @@ autocmd FileType cpp inoremap { {}<Left>
 autocmd FileType cpp inoremap ( ()<Left>
 autocmd FileType cpp inoremap [ []<Left>
 
-" Comment out selected lines in visual mode
-vnoremap <silent> <Leader>c :<C-u>call CommentOut()<CR>
-
-" Uncomment selected lines in visual mode
-vnoremap <silent> <Leader>u :<C-u>call Uncomment()<CR>
-
-" Function to comment out selected lines
-function! CommentOut()
-    execute "normal! `<I// "
-    execute "normal! `<V`>"
-endfunction
-
-" Function to uncomment selected lines
-function! Uncomment()
-    execute "normal! `<V`>s!^\s*// !!"
-endfunction
-
