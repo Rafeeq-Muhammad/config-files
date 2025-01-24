@@ -5,7 +5,7 @@
 # Aliases
 alias what="pwd && ls"
 alias configbash="vim ~/.bashrc"
-alias sourcebash="source ~/bashrc"
+alias sourcebash="source ~/.bashrc"
 
 # Navigation Aliases
 alias ..="cd .."
