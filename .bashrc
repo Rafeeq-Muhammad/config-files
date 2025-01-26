@@ -23,6 +23,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Force GUIs on WSL to use this as the backend instead of forcing wayland to resolve gui issues
+export GDK_BACKEND=x11
+
 # start fish shell
 WHICH_FISH="$(which fish)"
 if [[ "$-" =~ i && -x "${WHICH_FISH}" && ! "${SHELL}" -ef "${WHICH_FISH}" ]]; then
