@@ -1,0 +1,6 @@
+
+Run the following commands:
+
+mkdir -p ~/.fonts
+cp /path/to/FiraMono/*.ttf ~/.fonts
+fc-cache -f -v
