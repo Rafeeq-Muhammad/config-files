@@ -854,6 +854,7 @@ require("lazy").setup({
 			-- Load the colorscheme here.
 			-- Like many other themes, this one has different styles, and you could load
 			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+			vim.o.background = "dark" -- Set default background to dark
 			vim.cmd.colorscheme("retrobox")
 
 			-- You can configure highlights by doing something like:
@@ -991,6 +992,16 @@ require("lazy").setup({
 		},
 	},
 })
+
+function ToggleBackground()
+	if vim.o.background == "dark" then
+		vim.o.background = "light"
+	else
+		vim.o.background = "dark"
+	end
+end
+
+vim.keymap.set("n", "<leader>tb", ToggleBackground, { desc = "Toggle [T]heme [B]ackground" })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
