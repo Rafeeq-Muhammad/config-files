@@ -22,3 +22,17 @@ function replace_brackets
     echo $output
 end
 
+if not command -v neofetch > /dev/null
+    echo "Neofetch not found. Installing..."
+    sudo apt install -y neofetch
+end
+
+function fish_greeting
+    if not command -v neofetch > /dev/null
+        echo "Neofetch not found. Installing..."
+        sudo apt install -y neofetch
+    end
+    neofetch
+end
+
+

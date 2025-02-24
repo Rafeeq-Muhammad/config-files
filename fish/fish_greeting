@@ -1,6 +1,0 @@
-if not command -v neofetch > /dev/null
-    echo "Neofetch not found. Installing..."
-    sudo apt install -y neofetch
-end
-
-neofetch
