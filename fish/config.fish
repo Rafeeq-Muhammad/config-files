@@ -22,4 +22,3 @@ function replace_brackets
     echo $output
 end
 
-export GDK_BACKEND=x11
