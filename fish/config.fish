@@ -22,9 +22,30 @@ function replace_brackets
     echo $output
 end
 
-if not command -v neofetch > /dev/null
-    echo "Neofetch not found. Installing..."
-    sudo apt install -y neofetch
+function run_cpp
+    # Check if a filename was provided
+    if test (count $argv) -eq 0
+        echo "Usage: run_cpp <file.cpp>"
+        return 1
+    end
+
+    # Get the filename without extension
+    set filename (basename $argv[1] .cpp)
+
+    # Compile the C++ file with g++
+    g++ -o $filename $argv[1]
+
+    # Check if compilation was successful
+    if test $status -ne 0
+        echo "Compilation failed!"
+        return 1
+    end
+
+    # Run the executable
+    ./$filename
+
+    # Remove the executable after execution
+    rm -f $filename
 end
 
 function fish_greeting
