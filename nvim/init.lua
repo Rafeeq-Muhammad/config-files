@@ -234,6 +234,11 @@ require("lazy").setup({
 	-- with the first argument being the link and the following
 	-- keys can be used to configure plugin behavior/loading/etc.
 	--
+---- Add the retrobox colorscheme
+  {
+    "morhetz/gruvbox",
+    priority = 1000, -- Load before other plugins
+  },
 	-- Use `opts = {}` to force a plugin to be loaded.
 	--
 
@@ -855,7 +860,7 @@ require("lazy").setup({
 			-- Like many other themes, this one has different styles, and you could load
 			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 			vim.o.background = "dark" -- Set default background to dark
-			vim.cmd.colorscheme("retrobox")
+			vim.cmd.colorscheme("gruvbox")
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
