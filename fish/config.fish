@@ -1,7 +1,7 @@
 # Aliases
 alias what="pwd && ls"
-alias configfish="vim ~/.config/fish/config.fish"
-alias sourcefish="source ~/.config/fish/config.fish"
+alias configfish="nvim ~/.config/fish/config.fish"
+alias sourcefish="exec fish"
 
 # Navigation Aliases
 alias ..="cd .."
@@ -48,12 +48,12 @@ function run_cpp
     rm -f $filename
 end
 
-function fish_greeting
-    if not command -v neofetch > /dev/null
-        echo "Neofetch not found. Installing..."
-        sudo apt install -y neofetch
-    end
-    neofetch
-end
+# function fish_greeting
+#     if not command -v neofetch > /dev/null
+#         echo "Neofetch not found. Installing..."
+#         sudo apt install -y neofetch
+#     end
+#     neofetch
+# end
 
 
