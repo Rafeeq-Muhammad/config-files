@@ -1,7 +1,18 @@
+
+if status is-interactive
+
+    # Automaticall start tmux session if not already in one
+    if not set -q TMUX
+        tmux attach-session -t default || tmux new-session -s default
+    end
+end
+
+
 # Aliases
 alias what="pwd && ls"
 alias configfish="nvim ~/.config/fish/config.fish"
 alias sourcefish="exec fish"
+alias catfish="cat ~/.config/fish/config.fish"
 
 # Navigation Aliases
 alias ..="cd .."
@@ -47,13 +58,4 @@ function run_cpp
     # Remove the executable after execution
     rm -f $filename
 end
-
-# function fish_greeting
-#     if not command -v neofetch > /dev/null
-#         echo "Neofetch not found. Installing..."
-#         sudo apt install -y neofetch
-#     end
-#     neofetch
-# end
-
 
