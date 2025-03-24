@@ -10,15 +10,15 @@ return {
 			vim.g.autoswap_detect_tmux = 1
 		end,
 	},
-	{
-		"okuuva/auto-save.nvim",
-		version = "^1.0.0",
-		cmd = "ASToggle",
-		event = { "InsertLeave", "TextChanged" },
-		opts = {
-			-- Your config goes here or leave it empty
-		},
-	},
+	-- {
+	-- 	"okuuva/auto-save.nvim",
+	-- 	version = "^1.0.0",
+	-- 	cmd = "ASToggle",
+	-- 	event = { "InsertLeave", "TextChanged" },
+	-- 	opts = {
+	-- 		-- Your config goes here or leave it empty
+	-- 	},
+	-- },
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
