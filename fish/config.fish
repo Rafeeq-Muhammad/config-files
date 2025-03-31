@@ -37,7 +37,7 @@ function replace_brackets
     echo $output
 end
 
-function run_cpp
+function run
     # Check if a filename was provided
     if test (count $argv) -eq 0
         echo "Usage: run_cpp <file.cpp>"
