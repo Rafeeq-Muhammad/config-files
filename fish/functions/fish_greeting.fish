@@ -11,7 +11,7 @@ function show_random_picture
         set random_image $images[$random_index]
 
         # Display image as ASCII
-        jp2a --colors --width=(math (tput cols) / 2.5) $random_image
+        jp2a --colors --width=(math (tput cols) / 3) $random_image
     else
         # Fallback to neofetch if no images are found
         neofetch
@@ -20,3 +20,5 @@ end
 
 # Call the function
 show_random_picture
+
+# neofetch
