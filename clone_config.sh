@@ -2,6 +2,8 @@
 # curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 # fisher install Jomik/fish-gruvbox
 # theme_gruvbox dark soft
+#
+# sudo apt install clang-format
 
 
 git clone git@github.com:Rafeeq-Muhammad/config-files.git ~/config-temp
