@@ -3,22 +3,22 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-	{
-		"gioele/vim-autoswap",
-		config = function()
-			-- Enable tmux support if you use tmux
-			vim.g.autoswap_detect_tmux = 1
-		end,
-	},
 	-- {
-	-- 	"okuuva/auto-save.nvim",
-	-- 	version = "^1.0.0",
-	-- 	cmd = "ASToggle",
-	-- 	event = { "InsertLeave", "TextChanged" },
-	-- 	opts = {
-	-- 		-- Your config goes here or leave it empty
-	-- 	},
+	-- 	"gioele/vim-autoswap",
+	-- 	config = function()
+	-- 		-- Enable tmux support if you use tmux
+	-- 		vim.g.autoswap_detect_tmux = 1
+	-- 	end,
 	-- },
+	{
+		"okuuva/auto-save.nvim",
+		version = "^1.0.0",
+		cmd = "ASToggle",
+		event = { "InsertLeave", "TextChanged" },
+		opts = {
+			-- Your config goes here or leave it empty
+		},
+	},
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
