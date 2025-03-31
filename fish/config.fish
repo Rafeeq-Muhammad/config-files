@@ -1,13 +1,16 @@
 
 if status is-interactive
 
-    # dark/light soft/medium/hard
-    theme_gruvbox dark hard
-
     # Automaticall start tmux session if not already in one
     if not set -q TMUX
         tmux attach-session -t default || tmux new-session -s default
     end
+
+    if set -q TMUX
+        # dark/light soft/medium/hard
+        theme_gruvbox dark hard
+    end
+
 end
 
 
