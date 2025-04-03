@@ -19,7 +19,7 @@ alias what="pwd && ls"
 alias configfish="nvim ~/.config/fish/config.fish"
 alias sourcefish="exec fish"
 alias catfish="cat ~/.config/fish/config.fish"
-alias confignvim="cd ~/.config/nvim/ && nvim"
+alias confignvim="cd ~/.config/kickstart.nvim/ && nvim"
 
 # Programs
 alias anki="flatpak run net.ankiweb.Anki >/dev/null 2>&1 & disown"

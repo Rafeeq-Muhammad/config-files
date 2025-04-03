@@ -54,3 +54,5 @@ yelp/
 nvim/
 fish/functions/fish_prompt.fish
 fish/functions/fish_prompt.fish
+kickstart.nvim
+nvim
