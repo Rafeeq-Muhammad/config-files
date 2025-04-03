@@ -4,6 +4,11 @@
 # theme_gruvbox dark soft
 #
 # sudo apt install clang-format
+#
+#
+# symlink for nvim
+# ln -s /home/rafeeq/workspace/kickstart.nvim /home/rafeeq/.config/nvim
+
 
 
 git clone git@github.com:Rafeeq-Muhammad/config-files.git ~/config-temp
