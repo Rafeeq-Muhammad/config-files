@@ -66,6 +66,6 @@ function run
     ./$filename
 
     # Remove the executable after execution
-    rm -f $filename
+    # rm -f $filename
 end
 
