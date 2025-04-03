@@ -66,6 +66,27 @@ function run
     ./$filename
 
     # Remove the executable after execution
-    # rm -f $filename
+    rm -f $filename
+end
+
+function build
+    # Check if a filename was provided
+    if test (count $argv) -eq 0
+        echo "Usage: run_cpp <file.cpp>"
+        return 1
+    end
+
+    # Get the filename without extension
+    set filename (basename $argv[1] .cpp)
+
+    # Compile the C++ file with g++
+    g++ -g -o $filename $argv[1]
+
+    # Check if compilation was successful
+    if test $status -ne 0
+        echo "Compilation failed!"
+        return 1
+    end
+
 end
 
