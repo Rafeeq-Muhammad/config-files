@@ -8,7 +8,7 @@ if status is-interactive
 
     if set -q TMUX
         # dark/light soft/medium/hard
-        theme_gruvbox dark hard
+        theme_gruvbox dark soft
     end
 
 end
