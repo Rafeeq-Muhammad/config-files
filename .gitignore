@@ -61,3 +61,5 @@ jxbrowser/
 monitors.xml
 monitors.xml~
 pavucontrol.ini
+obs-studio/
+QtProject.conf
