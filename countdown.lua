@@ -14,9 +14,6 @@ hotkey_reset_id = obs.OBS_INVALID_HOTKEY_ID
 hotkey_pause_id = obs.OBS_INVALID_HOTKEY_ID
 hotkey_resume_id = obs.OBS_INVALID_HOTKEY_ID
 
--- Global variable to track the last time we decremented the timer
-local last_decrement = 0
-
 function set_time_text()
 	local seconds = math.floor(cur_seconds % 60)
 	local total_minutes = math.floor(cur_seconds / 60)
@@ -42,11 +39,8 @@ function set_time_text()
 end
 
 function timer_callback()
-	-- Get the current time using os.clock() for high resolution (seconds, with fractions)
-	local now = os.clock()
-	-- Only decrement if we're not paused and at least one second has elapsed since the last decrement
-	if not paused and (now - last_decrement >= 1.0) then
-		last_decrement = now
+	-- Simply decrement the counter every time the callback is triggered (every 1000 ms)
+	if not paused then
 		cur_seconds = cur_seconds - 1
 		if cur_seconds < 0 then
 			obs.remove_current_callback()
@@ -56,7 +50,12 @@ function timer_callback()
 	end
 end
 
+-- Modified start_timer_button prevents starting an already running timer
 function start_timer_button(props, p)
+	if activated then
+		-- Timer is already running; ignore this call.
+		return false
+	end
 	start_timer()
 	return false
 end
@@ -77,15 +76,15 @@ function reset_timer_button(props, p)
 end
 
 function start_timer()
-	if not activated then
-		activated = true
-		paused = false
-		cur_seconds = total_seconds
-		-- Reset last_decrement so that the timer starts fresh from now
-		last_decrement = os.clock()
-		set_time_text()
-		obs.timer_add(timer_callback, 1000)
+	-- Additional safeguard: if the timer is already activated, don't restart
+	if activated then
+		return
 	end
+	activated = true
+	paused = false
+	cur_seconds = total_seconds
+	set_time_text()
+	obs.timer_add(timer_callback, 1000)
 end
 
 function stop_timer()
@@ -108,8 +107,6 @@ function resume_timer(pressed)
 	end
 	if activated and paused then
 		paused = false
-		-- Also reset the last_decrement in case there's any delay
-		last_decrement = os.clock()
 	end
 end
 
