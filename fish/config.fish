@@ -54,7 +54,7 @@ function run
     set filename (basename $argv[1] .cpp)
 
     # Compile the C++ file with g++
-    g++ -o $filename $argv[1]
+    g++ -fsanitize=address -o $filename $argv[1]
 
     # Check if compilation was successful
     if test $status -ne 0
@@ -80,7 +80,7 @@ function build
     set filename (basename $argv[1] .cpp)
 
     # Compile the C++ file with g++
-    g++ -g -o $filename $argv[1]
+    g++ -fsanitize=address -g -o $filename $argv[1]
 
     # Check if compilation was successful
     if test $status -ne 0
