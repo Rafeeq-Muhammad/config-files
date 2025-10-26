@@ -9,7 +9,7 @@ function show_random_picture
         set -l random_image $images[$random_index]
 
         if command -q chafa
-            term_chafa "$random_image" 33
+            term_chafa "$random_image"
         else if command -q neofetch
             neofetch
         end
