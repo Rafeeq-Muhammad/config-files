@@ -1,0 +1,11 @@
+*
+!.gitignore
+!clone_config.sh
+!bash/
+!bash/**
+!fish/
+!fish/**
+fish/fish_variables
+!tmux/
+!tmux/**
+tmux/plugins/
