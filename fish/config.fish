@@ -62,29 +62,50 @@ function replace_brackets
 end
 
 function run
-    # Check if a filename was provided
     if test (count $argv) -eq 0
-        echo "Usage: run_cpp <file.cpp>"
+        echo "Usage: run <file.(cpp|c|py)> [args...]"
         return 1
     end
 
-    # Get the filename without extension
-    set filename (basename $argv[1] .cpp)
+    set -l filepath $argv[1]
+    set -l args $argv[2..-1]
+    set -l ext (string lower (string match -r '\.[^.]+$' -- $filepath))
 
-    # Compile the C++ file with g++
-    g++ -fsanitize=address -o $filename $argv[1]
-
-    # Check if compilation was successful
-    if test $status -ne 0
-        echo "Compilation failed!"
+    if test -z "$ext"
+        echo "run: unsupported file type for $filepath"
         return 1
     end
 
-    # Run the executable
-    ./$filename
-
-    # Remove the executable after execution
-    rm -f $filename
+    switch $ext
+    case ".cpp"
+        set -l filename (basename $filepath .cpp)
+        g++ -fsanitize=address -o $filename $filepath
+        if test $status -ne 0
+            echo "Compilation failed!"
+            return 1
+        end
+        ./$filename $args
+        set -l exit_code $status
+        rm -f $filename
+        return $exit_code
+    case ".c"
+        set -l filename (basename $filepath .c)
+        gcc -fsanitize=address -o $filename $filepath
+        if test $status -ne 0
+            echo "Compilation failed!"
+            return 1
+        end
+        ./$filename $args
+        set -l exit_code $status
+        rm -f $filename
+        return $exit_code
+    case ".py"
+        python3 $filepath $args
+        return $status
+    case '*'
+        echo "run: unsupported file type $ext"
+        return 1
+    end
 end
 
 function build
