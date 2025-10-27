@@ -407,8 +407,7 @@ set -g mode-keys vi
 # move status line to top
 #set -g status-position top
 
-# bind s to switch sessions, sorted by most recently used
-bind s choose-session -O last-attached
+bind s choose-tree -s -O time
 
 
 # -- tpm -----------------------------------------------------------------------
