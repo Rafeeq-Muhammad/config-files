@@ -44,6 +44,9 @@ else
     echo "⚠️ apt not found; skipping package install step" >&2
 fi
 
+echo "📝 Setting Git editor to Neovim"
+git config --global core.editor "nvim"
+
 # latest Neovim via official release tarball
 echo "⬇️  Installing latest Neovim release"
 NVIM_TMP_DIR="$(mktemp -d)"
