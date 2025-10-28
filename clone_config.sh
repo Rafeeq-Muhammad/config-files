@@ -24,6 +24,7 @@ APT_PACKAGES=(
     ripgrep
     tmux
     unzip
+    chafa
 )
 
 # apt-based package install
@@ -42,18 +43,44 @@ else
     echo "⚠️ apt not found; skipping package install step" >&2
 fi
 
-# latest neovim via PPA
-if command -v apt >/dev/null 2>&1; then
-    echo "⬇️  Ensuring latest Neovim from official PPA"
-    if ! ls /etc/apt/sources.list.d 2>/dev/null | grep -q 'neovim-ppa-ubuntu-stable'; then
-        sudo add-apt-repository -y ppa:neovim-ppa/stable
-    else
-        echo "✅ Neovim PPA already configured"
+# latest Neovim via official release tarball
+echo "⬇️  Installing latest Neovim release"
+NVIM_TMP_DIR="$(mktemp -d)"
+NVIM_TARBALL="$NVIM_TMP_DIR/nvim-linux-x86_64.tar.gz"
+NVIM_RELEASE_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
+
+if curl -fsSL "$NVIM_RELEASE_URL" -o "$NVIM_TARBALL"; then
+    tar -xzf "$NVIM_TARBALL" -C "$NVIM_TMP_DIR"
+    if [ ! -d "$NVIM_TMP_DIR/nvim-linux-x86_64" ]; then
+        echo "❌ Neovim archive structure unexpected; aborting install" >&2
+        rm -rf "$NVIM_TMP_DIR"
+        exit 1
     fi
-    sudo apt update
-    sudo apt install -y neovim
+
+    sudo rm -rf /opt/nvim
+    sudo mv "$NVIM_TMP_DIR/nvim-linux-x86_64" /opt/nvim
+    sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
+
+    INSTALLED_NVIM_VERSION="$(/opt/nvim/bin/nvim --version | head -n 1)"
+    echo "✅ ${INSTALLED_NVIM_VERSION}"
 else
-    echo "⚠️ apt not found; skipping Neovim PPA install" >&2
+    echo "❌ Failed to download Neovim release tarball" >&2
+    rm -rf "$NVIM_TMP_DIR"
+    exit 1
+fi
+
+rm -rf "$NVIM_TMP_DIR"
+
+# nvm install
+if [ ! -s "${HOME}/.nvm/nvm.sh" ]; then
+    echo "⬇️  Installing NVM"
+    if curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash; then
+        echo "✅ NVM installed"
+    else
+        echo "⚠️ NVM installer failed; skipping" >&2
+    fi
+else
+    echo "✅ NVM already installed"
 fi
 
 # npm-based installs
@@ -107,6 +134,20 @@ fi
 
 # fisher + theme setup
 if command -v fish >/dev/null 2>&1; then
+    OMF_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
+    OMF_PATH="${OMF_DATA_HOME}/omf"
+
+    if [ ! -f "${OMF_PATH}/init.fish" ]; then
+        echo "🐠 Installing Oh My Fish framework"
+        if curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish >/dev/null 2>&1; then
+            echo "✅ Oh My Fish installed"
+        else
+            echo "⚠️ Oh My Fish installer command failed; skipping" >&2
+        fi
+    else
+        echo "✅ Oh My Fish already installed"
+    fi
+
     if ! fish -c 'command -q fisher' >/dev/null 2>&1; then
         echo "🐟 Installing fisher package manager"
         fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
