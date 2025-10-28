@@ -21,8 +21,12 @@ alias catfish="cat ~/.config/fish/config.fish"
 alias confignvim="cd ~/.config/kickstart.nvim/ && nvim"
 alias geminiflash="gemini --model gemini-2.5-flash"
 
-# Programs
-alias anki="flatpak run net.ankiweb.Anki >/dev/null 2>&1 & disown"
+# Navigation Aliases
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 function next_leetcode
     set -l venv_activate /home/rafeeq/workspace/next-leetcode/.venv/bin/activate.fish
@@ -41,13 +45,6 @@ function next_leetcode
 
     return $exit_code
 end
-
-# Navigation Aliases
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
 
 function run
     if test (count $argv) -eq 0
