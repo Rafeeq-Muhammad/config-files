@@ -25,6 +25,7 @@ APT_PACKAGES=(
     tmux
     unzip
     chafa
+    python3.12-venv
 )
 
 # apt-based package install
