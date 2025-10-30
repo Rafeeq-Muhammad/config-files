@@ -1,6 +1,14 @@
 
 if status is-interactive
 
+    if type -q nvm
+        if not nvm use --silent 20 >/dev/null 2>&1
+            echo "Installing Node.js 20 via nvm..."
+            nvm install 20
+            nvm use --silent 20 >/dev/null 2>&1
+        end
+    end
+
     # Automaticall start tmux session if not already in one
     if not set -q TMUX
         tmux attach-session -t default || tmux new-session -s default
