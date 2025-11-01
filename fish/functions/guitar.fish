@@ -9,10 +9,10 @@ function concat_videos --description "Concat numbered video files in the current
     set -l search_order mp4 mkv mov m4v avi
 
     if test -n "$ext"
-        set files (command find . -maxdepth 1 -type f -iname "*.$ext" -printf "%f\n" | sort -V)
+        set files (command find . -maxdepth 1 -type f -iname "*.$ext" -printf "%f\n" | sort)
     else
         for candidate in $search_order
-            set files (command find . -maxdepth 1 -type f -iname "*.$candidate" -printf "%f\n" | sort -V)
+            set files (command find . -maxdepth 1 -type f -iname "*.$candidate" -printf "%f\n" | sort)
             if test (count $files) -gt 0
                 set ext $candidate
                 break

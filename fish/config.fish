@@ -21,6 +21,11 @@ if status is-interactive
 
 end
 
+# Ensure concat function is available in non-interactive sessions as well
+if test -f ~/.config/fish/functions/guitar.fish
+    source ~/.config/fish/functions/guitar.fish
+end
+
 # Aliases
 alias what="pwd && ls"
 alias configfish="nvim ~/.config/fish/config.fish"
