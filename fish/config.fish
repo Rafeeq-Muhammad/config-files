@@ -21,9 +21,12 @@ if status is-interactive
 
 end
 
-# Ensure concat function is available in non-interactive sessions as well
-if test -f ~/.config/fish/functions/guitar.fish
-    source ~/.config/fish/functions/guitar.fish
+# Source local helper functions when present
+for func in guitar next_leetcode
+    set -l func_path ~/.config/fish/functions/$func.fish
+    if test -f $func_path
+        source $func_path
+    end
 end
 
 # Aliases
