@@ -90,15 +90,26 @@ function build
         return 1
     end
 
-    # Get the filename without extension
-    set filename (basename $argv[1] .cpp)
+    set -l filepath $argv[1]
+    set -l ext (string lower (string match -r '\.[^.]+$' -- $filepath))
 
-    # Compile the C++ file with g++
-    g++ -fsanitize=address -g -o $filename $argv[1]
-
-    # Check if compilation was successful
-    if test $status -ne 0
-        echo "Compilation failed!"
+    switch $ext
+    case ".cpp"
+        set -l filename (basename $filepath .cpp)
+        g++ -fsanitize=address -g -o $filename $filepath
+        if test $status -ne 0
+            echo "Compilation failed!"
+            return 1
+        end
+    case ".c"
+        set -l filename (basename $filepath .c)
+        gcc -fsanitize=address -g -o $filename $filepath
+        if test $status -ne 0
+            echo "Compilation failed!"
+            return 1
+        end
+    case '*'
+        echo "build: unsupported file type $ext"
         return 1
     end
 
